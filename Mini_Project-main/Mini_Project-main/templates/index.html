@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Melbourne Housing Market</title>
+    <style>
+        body{
+        background:url({{url_for('static',filename='house4.jpg')}}) no-repeat center fixed;
+        background-size:cover;
+        }
+
+        h1{
+         text-align:center;
+         color:white;
+         font-size:50px;
+         font-family:"Arial Narrow","Myriad Pro";
+         font-weight: 2px;
+        }
+        #form input,select{
+            width:15%;
+            border-radius:5px;
+            height:30px;
+            background:#D6D6D6;
+        }
+        #form #submit{
+             height:30px;
+             width:10%;
+             background:rgb(59,118,135);
+        }
+        #form #reset{
+             height:30px;
+             width:10%;
+             background:rgb(59,118,135);
+        }
+        #price{
+            color:green;
+            font-size:20px solid;
+        }
+        #w{
+            width:100%;
+        }
+        label{
+            float:left;
+            color:#FFFFCC;
+            font-size:25px;
+            background:rgb(0,0.5,0,0.5);
+        }
+    </style>
+    <script>
+        function check(){
+            var land=document.getElementById('landsize').value;
+            var building=document.getElementById('building').value;
+            if(land<building){
+            alert("Landsize should not be less than Building area");
+            return false;
+            }
+            else{
+            return true;
+            }
+        }
+    </script>
+</head>
+<body >
+    <h1>Melbourne Housing Market</h1>
+    <br>
+    <div id="form">
+    <form method="POST" action="/houseprice" onsubmit="return check()">
+        <table align="'center">
+            <tr>
+                <td><label>Suburb:</label></td>
+                <td >
+                    <select id="sub" name="suburb" style="color:blue;">
+                        <option value="84">Richmond</option>
+                        <option value="83">Reservoir</option>
+                        <option value="12">Balwyn</option>
+                        <option value="20">Brunswick</option>
+                        <option value="15">Bentleigh</option>
+                        <option value="33">Coburg</option>
+                        <option value="40">Essendon</option>
+                        <option value="82">Preston</option>
+                        <option value="107">Yarraville</option>
+                        <option value="48">Glenroy</option>
+                        <option value="53">Hawthorn</option>
+                        <option value="79">Pascoe Vale</option>
+                        <option value="61">Kew</option>
+                        <option value="70">Moonee Ponds</option>
+                        <option value="47">Glen Iris</option>
+                        <option value="75">Northcote</option>
+                        <option value="19">Brighton</option>
+                        <option value="145">Craigieburn</option>
+                        <option value="46">Footscray</option>
+                        <option value="91">St Kilda</option>
+                        <option value="72">Newport</option>
+                        <option value="98">Thornbury</option>
+                        <option value="7">Ascot Vale</option>
+                        <option value="80">Port Melbourne</option>
+                        <option value="27">Carnegie</option>
+                        <option value="24">Camberwell</option>
+                        <option value="39">Elwood</option>
+                        <option value="65">Malvern</option>
+                        <option value="14">Bentleigh</option>
+                        <option value="59">Keilor</option>
+                        <option value="66">Maribyrnong</option>
+                        <option value="103">Williamstown</option>
+                        <option value="81">Prahran</option>
+                        <option value="36">Doncaster</option>
+                        <option value="96">Surrey Hills</option>
+                        <option value="115">Fawkner</option>
+                        <option value="60">Kensington</option>
+                        <option value="116">Hawthorn</option>
+                        <option value="97">Templestowe Lower</option>
+                        <option value="51">Hampton</option>
+                        <option value="184">Werribee</option>
+                        <option value="153">Epping</option>
+                        <option value="124">Footscray</option>
+                        <option value="95">Sunshine</option>
+                        <option value="168">Mill Park</option>
+                        <option value="1">Airport</option>
+                        <option value="57">Ivanhoe</option>
+                        <option value="63">Maidstone</option>
+                        <option value="181">Sunbury</option>
+                        <option value="123">Ormond</option>
+                        <option value="6">Armadale</option>
+                        <option value="38">Elsternwick</option>
+                        <option value="23">Burwood</option>
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                    <td id="l"><label>Rooms:</label></td>
+                    <td id="w"><input type="number" name="rooms" placeholder="Enter number of rooms" min="1" max="12" required></td>
+            </tr>
+            <tr>
+                    <td><label >Type:</label></td>
+                    <td ><select id="type" name="type" style="color:blue;">
+                            <option value="0">cottage</option>
+                            <option value="1">duplex</option>
+                            <option value="2">townhouse</option>
+                            </select></td>
+            </tr>
+             <tr>
+                    <td><label>SaleYear:</label></td>
+                    <td><input type="number" name="saleyear" placeholder="Enter Sale Year" min="2016" max="2050" required></td>
+            </tr>
+            <tr>
+                    <td><label>Distance:</label></td>
+                    <td><input type="number" name="distance" placeholder="Distance from CBD(KM)"  step='0.1' min="0" max="48.1" required></td>
+            </tr>
+            <tr>
+                    <td><label>Bedroom:</label></td>
+                    <td><input type="number" name="bedroom" placeholder="Enter number of bedrooms" min="1" max="12" required></td>
+            </tr>
+            <tr>
+                    <td><label>Bathroom:</label></td>
+                    <td><input type="number" name="bathroom" placeholder="Enter number of bathrooms" min="1" max="9" required></td>
+            </tr>
+            <tr>
+                    <td><label>CarSpots:</label></td>
+                    <td><input type="number" name="car" placeholder="Enter number of CarSpots" min="0" max="10" required></td>
+            </tr>
+            <tr>
+                    <td><label>LandSize:</label></td>
+                    <td><input  id="landsize" type="number" name="landsize" placeholder="Enter LandSize(SqMetres)" min="100" max="4200"required></td>
+            </tr>
+             <tr>
+                    <td><label>BuildingArea:</label></td>
+                    <td><input id="building" type="number" name="buildingarea"  placeholder="<=landsize(SqMeters)"  min="50" max="3112" required></td>
+            </tr>
+             <tr>
+                    <td><label>Built-in-Year:</label></td>
+                    <td><input type="number" name="year" placeholder="Enter Year" min="1196" max="2059" required></td>
+            </tr>
+            <tr>
+                    <td><label>CouncilArea:</label></td>
+                    <td>
+                        <select id="council" name="council" style="color:blue;">
+                            <option value="0">Yarra City</option>
+                            <option value="1">Moonee Valley City</option>
+                            <option value="2">Port Phillip City</option>
+                            <option value="3">Darebin City</option>
+                            <option value="4">Hobsons Bay City</option>
+                            <option value="5">'Stonnington City</option>
+                            <option value="6">Boroondara City</option>
+                            <option value="7">Monash City</option>
+                            <option value="8">Glen Eira City</option>
+                            <option value="9">Whitehorse City</option>
+                            <option value="10">Maribyrnong City</option>
+                            <option value="11">Bayside City</option>
+                            <option value="12">Moreland City</option>
+                            <option value="13">Manningham City</option>
+                            <option value="14">Melbourne City</option>
+                            <option value="15">Banyule City</option>
+                            <option value="16">Brimbank City</option>
+                            <option value="17">Kingston City</option>
+                            <option value="18">Hume City</option>
+                            <option value="19">Knox City</option>
+                            <option value="20">Maroondah City</option>
+                            <option value="21">Casey City</option>
+                            <option value="22">Melton City</option>
+                            <option value="23">Greater Dandenong City</option>
+                            <option value="24">Nillumbik Shire</option>
+                            <option value="25">Cardinia Shire</option>
+                            <option value="26">Whittlesea City</option>
+                            <option value="27">Frankston City</option>
+                            <option value="28">Macedon Ranges Shire</option>
+                            <option value="29">Yarra Ranges Shire</option>
+                            <option value="30">Wyndham City</option>
+                            <option value="31">Moorabool Shire</option>
+                            <option value="32">Mitchell Shire</option>
+                            </select>
+                    </td>
+            </tr>
+            <tr>
+                    <td><label>Region:</label></td>
+                    <td>
+                        <select id="region" name="region" style="color:blue;">
+                            <option value="0">Northern Metropolitan</option>
+                            <option value="1">Western Metropolitan</option>
+                            <option value="2">Southern Metropolitan</option>
+                            <option value="3">Eastern Metropolitan</option>
+                            <option value="4">South-Eastern Metropolitan</option>
+                            <option value="5">Northern Victoria</option>
+                            <option value="6">Eastern Victoria</option>
+                            <option value="7">Western Victoria</option>
+                        </select>
+                    </td>
+            </tr>
+
+        </table>
+        <input type="submit" id="submit">
+        <input type="reset" id="reset">
+    </form>
+    </div>
+</body>
+</html>
